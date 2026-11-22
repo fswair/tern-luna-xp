@@ -1,10 +1,10 @@
 /*
- * Tern Luna XP — Dark (v0.3)
+ * Tern Luna XP — Dark (v0.3.2)
  * Dark Windows XP Luna-inspired theme for Tern.
  * Standalone: includes the same original XP-style file icons as Luna XP Blue v0.2.
  * Install beside the light theme and switch with Tern's Theme picker.
  * Docs: https://docs.stencil.so/tern/guides/themes.html
- * This is not a replacement for native macOS title-bar controls.
+ * Styles Tern's own tab strip as the XP window title bar, like the light theme.
  */
 
 :root {
@@ -30,7 +30,7 @@
   --code-bg: #141a25;
   --tbl-head: #313a4e;
   --pop-bg: #272e40;
-  --topbar-bg: #2b3448;
+  --topbar-bg: #2456ad;
   --fog: #272f41;
   --well: #181f2c;
   --well-line: #526987;
@@ -154,6 +154,51 @@
   border: 1px solid #a1c6ff;
 }
 
+/* Top tab strip: the XP window title bar. The real DOM in this build is
+   nav#tabbar > .tb-in, with .tt.kit-tab tabs and .tn-session-tab — the
+   [role='tab'] rules below match nothing here, so they are kept only as a
+   fallback. Same glossy Luna blue as the light theme, slightly deeper to
+   sit with the dark palette. */
+#tabbar,
+#tabbar .tb-in {
+  background: linear-gradient(to bottom, #659df3 0%, #376fc9 17%, #2456ad 53%, #173f87 100%);
+  color: #ffffff;
+  border-bottom: 1px solid #102f69;
+  box-shadow: inset 0 1px 0 #99bfff;
+}
+
+#tabbar .tn-session-tab,
+#tabbar .tb-tools .icon-btn,
+#tabbar .tb-add,
+#tabbar .tb-blocks .icon-btn {
+  color: #ffffff;
+}
+
+#tabbar .tn-session-tab:hover,
+#tabbar .tb-tools .icon-btn:hover,
+#tabbar .tb-add:hover,
+#tabbar .tb-blocks .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#tabbar .tb-tabs .tt.kit-tab {
+  color: #ccd8ea;
+  background: linear-gradient(to bottom, #3a4255, #282f40);
+  border: 1px solid #52627b;
+  border-bottom-color: #172131;
+  border-radius: 5px 5px 0 0;
+  box-shadow: inset 0 1px 0 #58637b;
+}
+
+#tabbar .tb-tabs .tt.kit-tab.on {
+  color: #ffffff;
+  background: linear-gradient(to bottom, #4d86dd, #2e5ba7);
+  border: 1px solid #75a5f5;
+  border-bottom-color: #284d8b;
+  box-shadow: inset 0 2px 0 #9ebeff;
+  font-weight: 600;
+}
+
 /* Metallic graphite tabs; active tab is Luna blue instead of beige. */
 [role='tab'] {
   color: #ccd8ea;
@@ -216,12 +261,74 @@ textarea {
   letter-spacing: 0;
 }
 
-/* Distinct, high-contrast selection for file tree and pickers. */
+/* Distinct, high-contrast selection for file tree and pickers. Same
+   note as the light theme: target the row AND its label text, because
+   Tern colors .lbl itself and that wins over inheritance. */
 [role='treeitem'][aria-selected='true'],
-[role='option'][aria-selected='true'] {
-  background: linear-gradient(to bottom, #3776d1, #2358ad);
+[role='option'][aria-selected='true'],
+.ft-row.on,
+.ft-row[aria-selected='true'] {
+  background-color: #2358ad;
+  background-image: linear-gradient(to bottom, #3776d1, #2358ad);
   color: #ffffff;
   border-radius: 2px;
+}
+
+.ft-row.on .lbl,
+.ft-row[aria-selected='true'] .lbl,
+.ft-row.on .lbl .stem,
+.ft-row.on .lbl .ext,
+.ft-row[aria-selected='true'] .lbl .stem,
+.ft-row[aria-selected='true'] .lbl .ext,
+.ft-row.on .ft-st,
+.ft-row[aria-selected='true'] .ft-st,
+.ft-row.on svg.ico,
+.ft-row[aria-selected='true'] svg.ico {
+  color: #ffffff;
+}
+
+.ft-row:hover {
+  background-color: #2a3550;
+}
+
+#tabbar .tn-session-tab svg.ico {
+  color: #ffffff;
+}
+
+.csd-ctl .icon-btn {
+  color: #ffffff;
+}
+
+.csd-ctl .csd-min:hover,
+.csd-ctl .csd-max:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.csd-ctl .csd-close {
+  background-color: #c63412;
+  background-image: linear-gradient(to bottom, #f2a18d 0%, #e2573a 45%, #c63412 100%);
+  border: 1px solid #8f1d05;
+  border-radius: 3px;
+  color: #ffffff;
+}
+
+.csd-ctl .csd-close:hover {
+  background-image: linear-gradient(to bottom, #f7b3a0 0%, #ef6a4a 45%, #d63f17 100%);
+}
+
+.ed-bar {
+  background: linear-gradient(to bottom, #3b465d, #293344);
+  border-bottom: 1px solid #1b2536;
+  color: #eef3ff;
+}
+
+.ed-bar .ed-crumb.ed-loc-name {
+  color: #a9caff;
+  font-weight: 600;
+}
+
+.ed-bar .ed-facts {
+  color: #a9b6cc;
 }
 
 /* XP-style file icons (self-contained embedded SVGs).

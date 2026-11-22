@@ -1,11 +1,13 @@
 /*
  * Tern Luna XP — Blue
- * Version: 0.2.0
+ * Version: 0.2.2
  * A Windows XP Luna-inspired *light* theme with classic file icons for Tern.
  * Documentation: https://docs.stencil.so/tern/guides/themes.html
  *
- * This is a best-effort CSS theme, NOT a replacement for native macOS
- * title-bar controls. Some of Tern's internal CSS hooks can change.
+ * Styles Tern's own tab strip as the XP window title bar (blue Luna
+ * gradient, white text), the Files pane, the file editor bar and the
+ * status line. It cannot paint the OS desktop, taskbar or a menu bar —
+ * Tern has none of those.
  */
 
 :root {
@@ -31,7 +33,7 @@
   --code-bg: #f7f7f4;
   --tbl-head: #ece9d8;
   --pop-bg: #fbfaf4;
-  --topbar-bg: #ece9d8;
+  --topbar-bg: #245edb;
   --fog: #f4f3e9;
   --well: #ffffff;
   --well-line: #a9b5c2;
@@ -155,6 +157,51 @@
   border: 1px solid #aacaff;
 }
 
+/* Top tab strip: the XP window title bar. The real DOM in this build is
+   nav#tabbar > .tb-in, with .tt.kit-tab tabs and .tn-session-tab — the
+   [role='tab'] rules below match nothing here, so they are kept only as a
+   fallback. Paint the whole strip the glossy Luna blue from the reference
+   (white title text and icons, like the .ft-head Explorer header). */
+#tabbar,
+#tabbar .tb-in {
+  background: linear-gradient(to bottom, #75adff 0%, #3479e8 16%, #245edb 48%, #174ac1 100%);
+  color: #ffffff;
+  border-bottom: 1px solid #1644a1;
+  box-shadow: inset 0 1px 0 #a8caff;
+}
+
+#tabbar .tn-session-tab,
+#tabbar .tb-tools .icon-btn,
+#tabbar .tb-add,
+#tabbar .tb-blocks .icon-btn {
+  color: #ffffff;
+}
+
+#tabbar .tn-session-tab:hover,
+#tabbar .tb-tools .icon-btn:hover,
+#tabbar .tb-add:hover,
+#tabbar .tb-blocks .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#tabbar .tb-tabs .tt.kit-tab {
+  color: #313744;
+  background: linear-gradient(to bottom, #fffef7, #e7e4d5);
+  border: 1px solid #abaeae;
+  border-bottom-color: #9a9d9c;
+  border-radius: 5px 5px 0 0;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+
+#tabbar .tb-tabs .tt.kit-tab.on {
+  color: #153b89;
+  background: linear-gradient(to bottom, #e9f2ff, #ffffff);
+  border: 1px solid #6a9adc;
+  border-bottom-color: #ffffff;
+  box-shadow: inset 0 2px 0 #a9caff;
+  font-weight: 600;
+}
+
 /* Tab strip: classic beige surrounds and blue selected tabs. */
 [role='tab'] {
   color: #313744;
@@ -217,12 +264,82 @@ textarea {
   letter-spacing: 0;
 }
 
-/* Selected UI entries. Selector deliberately scoped to aria selection. */
+/* Selected UI entries. The row itself is not enough: Tern colors the
+   .lbl text itself (git status / extension colors win over inheritance),
+   and the row's background is painted by the row, so target the row AND
+   its label, stem, extension, git dot and twistie. */
 [role='treeitem'][aria-selected='true'],
-[role='option'][aria-selected='true'] {
-  background: linear-gradient(to bottom, #3f82f3, #195bd8);
+[role='option'][aria-selected='true'],
+.ft-row.on,
+.ft-row[aria-selected='true'] {
+  background-color: #195bd8;
+  background-image: linear-gradient(to bottom, #3f82f3, #195bd8);
   color: #ffffff;
   border-radius: 2px;
+}
+
+.ft-row.on .lbl,
+.ft-row[aria-selected='true'] .lbl,
+.ft-row.on .lbl .stem,
+.ft-row.on .lbl .ext,
+.ft-row[aria-selected='true'] .lbl .stem,
+.ft-row[aria-selected='true'] .lbl .ext,
+.ft-row.on .ft-st,
+.ft-row[aria-selected='true'] .ft-st,
+.ft-row.on svg.ico,
+.ft-row[aria-selected='true'] svg.ico {
+  color: #ffffff;
+}
+
+/* Hovered Files row: XP's pale blue hover. */
+.ft-row:hover {
+  background-color: #dce8ff;
+}
+
+/* Session tab icon: Tern leaves it grey on the blue strip; make it white
+   like the rest of the title bar. */
+#tabbar .tn-session-tab svg.ico {
+  color: #ffffff;
+}
+
+/* Window controls (CSD): they sit outside nav#tabbar, so they need their
+   own selector. White glyphs on blue; Close is the XP red button. */
+.csd-ctl .icon-btn {
+  color: #ffffff;
+}
+
+.csd-ctl .csd-min:hover,
+.csd-ctl .csd-max:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.csd-ctl .csd-close {
+  background-color: #c63412;
+  background-image: linear-gradient(to bottom, #f2a18d 0%, #e2573a 45%, #c63412 100%);
+  border: 1px solid #8f1d05;
+  border-radius: 3px;
+  color: #ffffff;
+}
+
+.csd-ctl .csd-close:hover {
+  background-image: linear-gradient(to bottom, #f7b3a0 0%, #ef6a4a 45%, #d63f17 100%);
+}
+
+/* File editor bar: the IDE's tab/breadcrumb strip. Beige toolbar with a
+   bold blue filename, like the reference window's editor tabs. */
+.ed-bar {
+  background: linear-gradient(to bottom, #fbfaf2, #e8e5d5);
+  border-bottom: 1px solid #b8b9b3;
+  color: #202020;
+}
+
+.ed-bar .ed-crumb.ed-loc-name {
+  color: #153b89;
+  font-weight: 600;
+}
+
+.ed-bar .ed-facts {
+  color: #4b5360;
 }
 
 
