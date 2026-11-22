@@ -1,5 +1,5 @@
 /*
- * Tern Luna XP — Dark (v0.3.5)
+ * Tern Luna XP — Dark (v0.3.6)
  * Dark Windows XP Luna-inspired theme for Tern.
  * Standalone: includes the same original XP-style file icons as Luna XP Blue v0.2.
  * Install beside the light theme and switch with Tern's Theme picker.
@@ -349,12 +349,22 @@ textarea {
 
 /* Selected rows win in every state (focused, unfocused, hovered): the
    #panel anchor outranks Tern's own state rules, so a selected row is
-   always blue with white text — never grey with white text. */
+   always blue with white text — never grey with white text. Note the
+   background lives on the row's ::before, not the row itself: Tern
+   paints the unfocused selection grey (var(--l2)) through ::before, so
+   the row's own background-color alone cannot stop it. */
 #panel .ft-row.on,
 #panel .ft-row[aria-selected='true'] {
   background-color: #2358ad;
   background-image: linear-gradient(to bottom, #3776d1, #2358ad);
   color: #ffffff;
+}
+
+#panel .ft-row.on::before,
+#panel .ft-row[aria-selected='true']::before,
+#panel .ft-row.on:active::before {
+  background-color: #2358ad;
+  background-image: linear-gradient(to bottom, #3776d1, #2358ad);
 }
 
 #panel .ft-row.on .lbl,

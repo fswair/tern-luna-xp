@@ -1,6 +1,6 @@
 /*
  * Tern Luna XP — Blue
- * Version: 0.2.5
+ * Version: 0.2.6
  * A Windows XP Luna-inspired *light* theme with classic file icons for Tern.
  * Documentation: https://docs.stencil.so/tern/guides/themes.html
  *
@@ -342,12 +342,22 @@ textarea {
 
 /* Selected rows win in every state (focused, unfocused, hovered): the
    #panel anchor outranks Tern's own state rules, so a selected row is
-   always blue with white text — never grey with white text. */
+   always blue with white text — never grey with white text. Note the
+   background lives on the row's ::before, not the row itself: Tern
+   paints the unfocused selection grey (var(--l2)) through ::before, so
+   the row's own background-color alone cannot stop it. */
 #panel .ft-row.on,
 #panel .ft-row[aria-selected='true'] {
   background-color: #195bd8;
   background-image: linear-gradient(to bottom, #3f82f3, #195bd8);
   color: #ffffff;
+}
+
+#panel .ft-row.on::before,
+#panel .ft-row[aria-selected='true']::before,
+#panel .ft-row.on:active::before {
+  background-color: #195bd8;
+  background-image: linear-gradient(to bottom, #3f82f3, #195bd8);
 }
 
 #panel .ft-row.on .lbl,
