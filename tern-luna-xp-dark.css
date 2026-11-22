@@ -1,0 +1,371 @@
+/*
+ * Tern Luna XP — Dark (v0.3)
+ * Dark Windows XP Luna-inspired theme for Tern.
+ * Standalone: includes the same original XP-style file icons as Luna XP Blue v0.2.
+ * Install beside the light theme and switch with Tern's Theme picker.
+ * Docs: https://docs.stencil.so/tern/guides/themes.html
+ * This is not a replacement for native macOS title-bar controls.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Luna blue accents, on midnight-blue steel instead of XP cream */
+  --xp-royal: #3b7bde;
+  --xp-blue: #448cf4;
+  --xp-blue-top: #669df6;
+  --xp-blue-bottom: #1b478f;
+  --xp-stroke: #5676a0;
+  --xp-cream: #282d3b;
+  --xp-cream-light: #343b50;
+  --xp-paper: #171c27;
+  --xp-ink: #e4ebfb;
+  --xp-muted: #aab8d0;
+
+  /* Core Tern chrome & raised surfaces */
+  --page: #202534;
+  --panel: #171d29;
+  --card: #242b3b;
+  --raise: #30384a;
+  --code-bg: #141a25;
+  --tbl-head: #313a4e;
+  --pop-bg: #272e40;
+  --topbar-bg: #2b3448;
+  --fog: #272f41;
+  --well: #181f2c;
+  --well-line: #526987;
+
+  /* Higher number = quieter interface text / borders */
+  --ink: #e4ebfb;
+  --t1: #eef3ff;
+  --t2: #c2cee3;
+  --t3: #96a6c2;
+  --t4: #7184a4;
+  --l1: #39465e;
+  --l2: #455470;
+  --l3: #62718c;
+  --l4: #7e90ac;
+
+  --accent: #6ba7ff;
+  --accent-ink: #a2c7ff;
+  --accent-fill: #2f65bc;
+  --a1: #7bb6ff;
+  --a2: #2d5fb4;
+  --grad-ink: #ffffff;
+  --ok: #71d9a2;
+  --ok-fill: #187447;
+  --bad: #ff8291;
+  --bad-fill: #9c3043;
+  --warn: #f2c66f;
+  --live: #c9a0ff;
+  --live-fill: #8151b0;
+
+  /* Slightly squared 2000s desktop control geometry */
+  --r-chip: 3px;
+  --r-ctl: 3px;
+  --r-card: 4px;
+  --r-panel: 5px;
+  --sans: Tahoma, 'Lucida Grande', Arial, sans-serif;
+  --mono: Menlo, 'DejaVu Sans Mono', monospace;
+
+  /* Terminal: light text, dark surface, readable ANSI colors */
+  --tv-bg: #171b27;
+  --tv-fg: #e1e8f7;
+  --tv-cur: #89b9ff;
+  --tv-cur-ink: #111827;
+  --tv-sel: #35558a;
+  --tv-sel-a: #29446e;
+  --tv-sel-b: #4569a2;
+
+  --ansi0: #222938;
+  --ansi1: #ef7580;
+  --ansi2: #70cf9b;
+  --ansi3: #e2bd6b;
+  --ansi4: #86b3ff;
+  --ansi5: #ca98ec;
+  --ansi6: #67c9db;
+  --ansi7: #c9d5e8;
+  --ansi8: #7c8ca6;
+  --ansi9: #ff929a;
+  --ansi10: #92e3b5;
+  --ansi11: #f1d68b;
+  --ansi12: #a4c8ff;
+  --ansi13: #e0b0ff;
+  --ansi14: #8cdeed;
+  --ansi15: #f7faff;
+
+  /* Code syntax designed to stay visible on a dark terminal */
+  --tk-comment: #91a990;
+  --tk-doc: #85c2a8;
+  --tk-keyword: #a5a0ff;
+  --tk-function: #8db9ff;
+  --tk-macro: #db9be6;
+  --tk-property: #91c4df;
+  --tk-variable: #e5edf9;
+  --tk-string: #98d995;
+  --tk-escape: #7fdbc4;
+  --tk-number: #ffc18e;
+  --tk-constant: #e8c682;
+  --tk-type: #86d7e3;
+  --tk-tag: #ff9e9e;
+  --tk-heading: #9bc1ff;
+  --tk-link: #8db6ff;
+  --tk-operator: #f39db9;
+  --tk-punct: #becbde;
+
+  /* omp native chat and tool output */
+  --omp-mdHeading: #a3c5ff;
+  --omp-mdLink: #8ebaff;
+  --omp-mdCode: #f8bc90;
+  --omp-mdQuote: #adbcd4;
+  --omp-toolTitle: #9ec3ff;
+  --omp-toolDiffAdded: #80dca9;
+  --omp-toolDiffRemoved: #ff8b92;
+  --omp-syntaxKeyword: #a5a0ff;
+  --omp-syntaxString: #98d995;
+  --omp-statusLineModel: #a4bcff;
+}
+
+/* Main work area stays dark, but uses a slightly different shade from chrome. */
+.sf-main,
+.sf-dock {
+  color: var(--tv-fg);
+}
+
+/* XP's signature glossy blue Explorer header works in dark mode. */
+.ft-head {
+  color: #ffffff;
+  background: linear-gradient(to bottom, #659df3 0%, #376fc9 17%, #2456ad 53%, #173f87 100%);
+  border-bottom: 1px solid #102f69;
+  box-shadow: inset 0 1px 0 #99bfff;
+  border-radius: 4px 4px 0 0;
+  font-weight: 600;
+}
+
+.ft-head .icon-btn,
+.ft-head .ft-hb {
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+.ft-head .icon-btn:hover,
+.ft-head .ft-hb:hover {
+  background: #3f70bf;
+  border: 1px solid #a1c6ff;
+}
+
+/* Metallic graphite tabs; active tab is Luna blue instead of beige. */
+[role='tab'] {
+  color: #ccd8ea;
+  background: linear-gradient(to bottom, #3a4255, #282f40);
+  border: 1px solid #52627b;
+  border-bottom-color: #172131;
+  border-radius: 5px 5px 0 0;
+  box-shadow: inset 0 1px 0 #58637b;
+}
+
+[role='tab'][aria-selected='true'] {
+  color: #ffffff;
+  background: linear-gradient(to bottom, #4d86dd, #2e5ba7);
+  border: 1px solid #75a5f5;
+  border-bottom-color: #284d8b;
+  box-shadow: inset 0 2px 0 #9ebeff;
+  font-weight: 600;
+}
+
+/* Windows XP-inspired recessed input surfaces and beveled controls. */
+button:not([role='tab']):not(.ft-hb),
+select {
+  border-radius: 3px;
+}
+
+button:not([role='tab']):not(.ft-hb):not(.sf-composer-send) {
+  box-shadow: inset 0 1px 0 #4d5c76;
+}
+
+input,
+textarea {
+  border-radius: 2px;
+  border-color: #526786;
+  background: #1b2230;
+  color: #eef3ff;
+}
+
+/* Lens cards & embedded controls inherit the dark palette. */
+.sf-card {
+  border-color: #465a77;
+  border-radius: 4px;
+}
+
+.sf-block {
+  border-color: #536883;
+  border-radius: 3px;
+}
+
+.sf-block-bar {
+  background: linear-gradient(to bottom, #3b465d, #293344);
+  border-bottom: 1px solid #1b2536;
+}
+
+/* Pane status bar, like a dark XP IDE skin. */
+#statusline {
+  background: linear-gradient(to bottom, #353d51, #262d3d);
+  color: #dce7f8;
+  border-top: 1px solid #5a7197;
+  box-shadow: inset 0 1px 0 #52617b;
+  letter-spacing: 0;
+}
+
+/* Distinct, high-contrast selection for file tree and pickers. */
+[role='treeitem'][aria-selected='true'],
+[role='option'][aria-selected='true'] {
+  background: linear-gradient(to bottom, #3776d1, #2358ad);
+  color: #ffffff;
+  border-radius: 2px;
+}
+
+/* XP-style file icons (self-contained embedded SVGs).
+   Tern Files-pane icon selectors are documented at docs.stencil.so/tern/guides/chrome.html#file-icons.
+   Base64 data URLs avoid path resolution differences between themes and plugins. */
+.ft-ic[data-kind='file'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y5ZmJmZiIgc3Ryb2tlPSIjN2I4ZWE2IiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNOSAxLjV2NGg0IiBmaWxsPSIjZGNlN2Y0IiBzdHJva2U9IiM3YjhlYTYiIHN0cm9rZS13aWR0aD0iLjgiLz48cGF0aCBkPSJNNSA4aDZNNSAxMGg2TTUgMTJoNCIgc3Ryb2tlPSIjYjBiZmNkIiBzdHJva2Utd2lkdGg9Ii44Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='dir'][data-open='false'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZTk5ZSIvPjxzdG9wIG9mZnNldD0iMC41NSIgc3RvcC1jb2xvcj0iI2ZmY2U1OCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2U5YTQyYiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGQ9Ik0xLjMgMy40aDUuMWwxLjEgMS41aDYuOHY4LjlIMS4zeiIgZmlsbD0iI2I3ODEyZiIgc3Ryb2tlPSIjOGU2NTJlIiBzdHJva2Utd2lkdGg9Ii43Ii8+PHBhdGggZD0iTTIgMy43aDQuNGwxLjEgMS42SDE0djcuN0gyeiIgZmlsbD0idXJsKCNiKSIvPjxwYXRoIGQ9Ik0yLjQgNS40SDEzLjciIHN0cm9rZT0iI2ZmZjRiNSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTIuNSAxMi44aDEwLjciIHN0cm9rZT0iI2NlOTEzNCIgc3Ryb2tlLXdpZHRoPSIuNSIvPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='dir'][data-open='true'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZjFhYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2U1YTczMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGQ9Ik0xLjIgMy44aDUuM2wxIDEuM0gxNHY3LjZIMS4yeiIgZmlsbD0iI2YyYzE1NyIgc3Ryb2tlPSIjOGM2MTIyIiBzdHJva2Utd2lkdGg9Ii43Ii8+PHBhdGggZD0iTTMuNCA1LjZoOS45djUuOEgzLjR6IiBmaWxsPSIjZmZmOWU3IiBzdHJva2U9IiNkNmE3NDciIHN0cm9rZS13aWR0aD0iLjUiLz48cGF0aCBkPSJNMi4yIDcuMmgxMi4zbC0yLjQgNi40SC44eiIgZmlsbD0idXJsKCNiKSIgc3Ryb2tlPSIjYTY3MjI4IiBzdHJva2Utd2lkdGg9Ii43Ii8+PHBhdGggZD0iTTIuMSA4aDExIiBzdHJva2U9IiNmZmY2YzciIHN0cm9rZS13aWR0aD0iLjgiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='json'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmJmZiIgc3Ryb2tlPSIjNzg4Y2E3IiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNjZGRkZjAiLz48cGF0aCBkPSJNNyA2LjVjLTEuNSAwLS44IDEuMS0xLjcgMS4xLjkgMCAuMiAxLjIgMS43IDEuMk05IDYuNWMxLjUgMCAuOCAxLjEgMS43IDEuMS0uOSAwLS4yIDEuMi0xLjcgMS4yIiBzdHJva2U9IiMyYjcxYzkiIHN0cm9rZS13aWR0aD0iMS4yIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSI4IiBjeT0iNy43IiByPSIuOCIgZmlsbD0iI2U0YTUyYiIvPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='py'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2ZmZmRmNiIgc3Ryb2tlPSIjNzM4NDliIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U5ZmYiLz48cGF0aCBkPSJNNC4yIDkuMWMwLTEuOC45LTIuNSAyLjYtMi41aDEuMVY1LjVoMS40djEuOUg2Ljl2Mi44SDQuMnoiIGZpbGw9IiMzMjc3YjciLz48cGF0aCBkPSJNMTEuOCA4YzAgMS44LS45IDIuNS0yLjYgMi41SDguMXYxLjFINi43VjkuN2gyLjRWOGgyLjd6IiBmaWxsPSIjZWRiYjQwIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjcuNCIgcj0iLjQyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iOS42IiByPSIuNDIiIGZpbGw9IndoaXRlIi8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='pyi'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2ZmZmRmNiIgc3Ryb2tlPSIjNzM4NDliIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U5ZmYiLz48cGF0aCBkPSJNNC4yIDkuMWMwLTEuOC45LTIuNSAyLjYtMi41aDEuMVY1LjVoMS40djEuOUg2Ljl2Mi44SDQuMnoiIGZpbGw9IiMzMjc3YjciLz48cGF0aCBkPSJNMTEuOCA4YzAgMS44LS45IDIuNS0yLjYgMi41SDguMXYxLjFINi43VjkuN2gyLjRWOGgyLjd6IiBmaWxsPSIjZWRiYjQwIi8+PGNpcmNsZSBjeD0iNiIgY3k9IjcuNCIgcj0iLjQyIiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iOS42IiByPSIuNDIiIGZpbGw9IndoaXRlIi8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='rs'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2ZmZmFmMSIgc3Ryb2tlPSIjN2Y4YzlkIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNlN2RmZDgiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOS4zIiByPSIzLjEiIGZpbGw9IiNiZDY3MzIiIHN0cm9rZT0iIzc4NDQyOSIgc3Ryb2tlLXdpZHRoPSIuNyIvPjxwYXRoIGQ9Ik02LjQgMTAuNlY4aDEuOGMxLjcgMCAxLjggMS43IDAgMS43aC0xLjhtMS43LS43IDEuNCAxLjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iLjg1IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='md'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y4ZmNmZiIgc3Ryb2tlPSIjN2Y5MmE5IiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkOWU3ZjgiLz48cGF0aCBkPSJNNC4zIDcuM2g3LjV2NEg0LjN6IiBmaWxsPSIjMjU1YmJhIi8+PHBhdGggZD0iTTUgMTAuMlY4LjNsMSAxIDEtMXYxLjlNOC41IDguMnYybS0xLTEgMSAxIDEtMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIuNzUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-name='.gitignore'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2ZmZjhmMiIgc3Ryb2tlPSIjODc5MmE0IiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNmN2QyYmYiLz48cGF0aCBkPSJNNyA3bDQgNE03IDd2NCIgc3Ryb2tlPSIjYjk1YjMyIiBzdHJva2Utd2lkdGg9Ii44Ii8+PGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjEuMSIgZmlsbD0iI2UyNzc0MiIgc3Ryb2tlPSIjYTc0NzIxIiBzdHJva2Utd2lkdGg9Ii41Ii8+PGNpcmNsZSBjeD0iNyIgY3k9IjExIiByPSIxLjEiIGZpbGw9IiNlMjc3NDIiIHN0cm9rZT0iI2E3NDcyMSIgc3Ryb2tlLXdpZHRoPSIuNSIvPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjEuMSIgZmlsbD0iI2UyNzc0MiIgc3Ryb2tlPSIjYTc0NzIxIiBzdHJva2Utd2lkdGg9Ii41Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-name='.gitattributes'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2ZmZjhmMiIgc3Ryb2tlPSIjODc5MmE0IiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNmN2QyYmYiLz48cGF0aCBkPSJNNyA3bDQgNE03IDd2NCIgc3Ryb2tlPSIjYjk1YjMyIiBzdHJva2Utd2lkdGg9Ii44Ii8+PGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjEuMSIgZmlsbD0iI2UyNzc0MiIgc3Ryb2tlPSIjYTc0NzIxIiBzdHJva2Utd2lkdGg9Ii41Ii8+PGNpcmNsZSBjeD0iNyIgY3k9IjExIiByPSIxLjEiIGZpbGw9IiNlMjc3NDIiIHN0cm9rZT0iI2E3NDcyMSIgc3Ryb2tlLXdpZHRoPSIuNSIvPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjEuMSIgZmlsbD0iI2UyNzc0MiIgc3Ryb2tlPSIjYTc0NzIxIiBzdHJva2Utd2lkdGg9Ii41Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='toml'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y5ZmJmZiIgc3Ryb2tlPSIjNzE4NTlkIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U1ZjMiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMi44IiBmaWxsPSIjNjc4NjllIiBzdHJva2U9IiM0ZjY1NzkiIHN0cm9rZS13aWR0aD0iLjciLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMS4yIiBmaWxsPSIjZWVmNWY5Ii8+PHBhdGggZD0iTTcuNiA1Ljd2MU03LjYgMTEuMnYxLjFNNC44IDloMU0xMC4zIDloMU01LjcgNi44bC43LjdNOS41IDEwLjNsLjguOCIgc3Ryb2tlPSIjNDY1ZTc2IiBzdHJva2Utd2lkdGg9Ii45Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='yaml'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y5ZmJmZiIgc3Ryb2tlPSIjNzE4NTlkIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U1ZjMiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMi44IiBmaWxsPSIjNjc4NjllIiBzdHJva2U9IiM0ZjY1NzkiIHN0cm9rZS13aWR0aD0iLjciLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMS4yIiBmaWxsPSIjZWVmNWY5Ii8+PHBhdGggZD0iTTcuNiA1Ljd2MU03LjYgMTEuMnYxLjFNNC44IDloMU0xMC4zIDloMU01LjcgNi44bC43LjdNOS41IDEwLjNsLjguOCIgc3Ryb2tlPSIjNDY1ZTc2IiBzdHJva2Utd2lkdGg9Ii45Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='yml'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y5ZmJmZiIgc3Ryb2tlPSIjNzE4NTlkIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U1ZjMiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMi44IiBmaWxsPSIjNjc4NjllIiBzdHJva2U9IiM0ZjY1NzkiIHN0cm9rZS13aWR0aD0iLjciLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMS4yIiBmaWxsPSIjZWVmNWY5Ii8+PHBhdGggZD0iTTcuNiA1Ljd2MU03LjYgMTEuMnYxLjFNNC44IDloMU0xMC4zIDloMU01LjcgNi44bC43LjdNOS41IDEwLjNsLjguOCIgc3Ryb2tlPSIjNDY1ZTc2IiBzdHJva2Utd2lkdGg9Ii45Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-name='.env'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y5ZmJmZiIgc3Ryb2tlPSIjNzE4NTlkIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkY2U1ZjMiLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMi44IiBmaWxsPSIjNjc4NjllIiBzdHJva2U9IiM0ZjY1NzkiIHN0cm9rZS13aWR0aD0iLjciLz48Y2lyY2xlIGN4PSI4IiBjeT0iOSIgcj0iMS4yIiBmaWxsPSIjZWVmNWY5Ii8+PHBhdGggZD0iTTcuNiA1Ljd2MU03LjYgMTEuMnYxLjFNNC44IDloMU0xMC4zIDloMU01LjcgNi44bC43LjdNOS41IDEwLjNsLjguOCIgc3Ryb2tlPSIjNDY1ZTc2IiBzdHJva2Utd2lkdGg9Ii45Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='ts'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='tsx'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='js'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='jsx'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='css'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ft-ic[data-kind='file'][data-ext='html'] {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMyAxLjVoNmw0IDR2OUgzeiIgZmlsbD0iI2Y3ZmNmYSIgc3Ryb2tlPSIjNzg5M2EwIiBzdHJva2Utd2lkdGg9Ii45Ii8+PHBhdGggZD0iTTkgMS43djMuOGgzLjgiIGZpbGw9IiNkYmVjZTgiLz48cGF0aCBkPSJNNi42IDcuMSA0LjkgOWwxLjcgMS44TTkuNSA3LjFsMS43IDEuOS0xLjcgMS44TTguOCA2LjdsLTEuNSA0LjciIHN0cm9rZT0iIzMwN2Q5MiIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* The original Material glyph remains in the DOM but must not be drawn. */
+.ft-ic[data-kind] > svg.ico { display: none; }
