@@ -1,5 +1,5 @@
 /*
- * Tern Luna XP — Dark (v0.3.2)
+ * Tern Luna XP — Dark (v0.3.5)
  * Dark Windows XP Luna-inspired theme for Tern.
  * Standalone: includes the same original XP-style file icons as Luna XP Blue v0.2.
  * Install beside the light theme and switch with Tern's Theme picker.
@@ -174,11 +174,43 @@
   color: #ffffff;
 }
 
+/* The glyphs themselves: Tern can color an svg.ico on its own, so paint
+   them white explicitly, not just their buttons. */
+#tabbar .tb-tools .icon-btn svg.ico,
+#tabbar .tb-add svg.ico,
+#tabbar .tb-blocks .icon-btn svg.ico,
+#tabbar .tn-ib-badge svg.ico {
+  color: #ffffff;
+}
+
 #tabbar .tn-session-tab:hover,
 #tabbar .tb-tools .icon-btn:hover,
 #tabbar .tb-add:hover,
 #tabbar .tb-blocks .icon-btn:hover {
   background: rgba(255, 255, 255, 0.18);
+}
+
+/* Hovered title-bar icons go dark blue on a white pill, like the light
+   theme: Tern slides a dark pill behind the hovered tool button, and a
+   light icon on it is muddy. The pill is the button's ::before, so paint
+   that white too (and pale blue while pressed). */
+#tabbar .tb-tools > .icon-btn::before,
+#tabbar .tn-ib-badge::before {
+  background: #ffffff;
+}
+
+#tabbar .tb-tools > .icon-btn:active::before,
+#tabbar .tn-ib-badge:active::before {
+  background: #dce8ff;
+}
+
+#tabbar .tb-tools .icon-btn:hover,
+#tabbar .tb-add:hover,
+#tabbar .tb-blocks .icon-btn:hover,
+#tabbar .tb-tools .icon-btn:hover svg.ico,
+#tabbar .tb-add:hover svg.ico,
+#tabbar .tb-blocks .icon-btn:hover svg.ico {
+  color: #153b89;
 }
 
 #tabbar .tb-tabs .tt.kit-tab {
@@ -224,8 +256,19 @@ select {
   border-radius: 3px;
 }
 
-button:not([role='tab']):not(.ft-hb):not(.sf-composer-send) {
+/* The bevel paints a 1px light top edge on plain buttons. The session
+   and host tabs are plain buttons too, so exclude them: on the blue strip
+   that edge reads as a stray border around Default and the logo. */
+button:not([role='tab']):not(.ft-hb):not(.sf-composer-send):not(.icon-btn):not(.tn-session-tab):not(.tn-host-tab) {
   box-shadow: inset 0 1px 0 #4d5c76;
+}
+
+/* Tab strip buttons sit directly on the blue gradient: the generic bevel's
+   top edge reads as a stray light border on them. The Default session tab
+   is a plain <button> (not .icon-btn), so the exclusion above misses it.
+   Cream kit-tabs keep their own inset edge. */
+#tabbar button:not(.tt.kit-tab):not([role='tab']) {
+  box-shadow: none;
 }
 
 input,
@@ -287,8 +330,50 @@ textarea {
   color: #ffffff;
 }
 
-.ft-row:hover {
+/* Same white label, stronger selectors: a directory label can outrank
+   the rule above on some builds. */
+.ft-body .ft-row.on .lbl,
+.ft-body .ft-row[aria-selected='true'] .lbl,
+.ft-row.dir.on .lbl,
+.ft-row.dir[aria-selected='true'] .lbl,
+.ft-body .ft-row.on .lbl .stem,
+.ft-body .ft-row.on .lbl .ext,
+.ft-row.dir.on .lbl .stem,
+.ft-row.dir.on .lbl .ext,
+.ft-body .ft-row.on .ft-st,
+.ft-row.dir.on .ft-st,
+.ft-body .ft-row.on svg.ico,
+.ft-row.dir.on svg.ico {
+  color: #ffffff;
+}
+
+/* Selected rows win in every state (focused, unfocused, hovered): the
+   #panel anchor outranks Tern's own state rules, so a selected row is
+   always blue with white text — never grey with white text. */
+#panel .ft-row.on,
+#panel .ft-row[aria-selected='true'] {
+  background-color: #2358ad;
+  background-image: linear-gradient(to bottom, #3776d1, #2358ad);
+  color: #ffffff;
+}
+
+#panel .ft-row.on .lbl,
+#panel .ft-row[aria-selected='true'] .lbl,
+#panel .ft-row.on .lbl .stem,
+#panel .ft-row.on .lbl .ext,
+#panel .ft-row.on .ft-st,
+#panel .ft-row.on svg.ico {
+  color: #ffffff;
+}
+
+.ft-row:hover:not(.on):not([aria-selected='true']) {
   background-color: #2a3550;
+}
+
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl,
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl .stem,
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl .ext {
+  color: #c2cee3;
 }
 
 #tabbar .tn-session-tab svg.ico {
@@ -314,6 +399,30 @@ textarea {
 
 .csd-ctl .csd-close:hover {
   background-image: linear-gradient(to bottom, #f7b3a0 0%, #ef6a4a 45%, #d63f17 100%);
+}
+
+/* Restart-to-update pill: Tern paints it nearly transparent (a 10%
+   accent wash plus a blur animation), which is unreadable on the blue
+   strip. Solid white pill, dark blue text, no animated overlay — same
+   as the light theme. */
+.tn-up {
+  background: #ffffff;
+  color: #153b89;
+  box-shadow: inset 0 0 0 1px #9db9e8;
+  opacity: 1;
+}
+
+.tn-up .lbl,
+.tn-up .ico {
+  color: #153b89;
+}
+
+.tn-up:hover {
+  background: #e8eefb;
+}
+
+.tn-up .tn-up-fx {
+  display: none;
 }
 
 .ed-bar {

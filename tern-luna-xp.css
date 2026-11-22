@@ -1,6 +1,6 @@
 /*
  * Tern Luna XP — Blue
- * Version: 0.2.2
+ * Version: 0.2.5
  * A Windows XP Luna-inspired *light* theme with classic file icons for Tern.
  * Documentation: https://docs.stencil.so/tern/guides/themes.html
  *
@@ -177,11 +177,31 @@
   color: #ffffff;
 }
 
+/* The glyphs themselves: Tern can color an svg.ico on its own, so paint
+   them white explicitly, not just their buttons. */
+#tabbar .tb-tools .icon-btn svg.ico,
+#tabbar .tb-add svg.ico,
+#tabbar .tb-blocks .icon-btn svg.ico,
+#tabbar .tn-ib-badge svg.ico {
+  color: #ffffff;
+}
+
 #tabbar .tn-session-tab:hover,
 #tabbar .tb-tools .icon-btn:hover,
 #tabbar .tb-add:hover,
 #tabbar .tb-blocks .icon-btn:hover {
   background: rgba(255, 255, 255, 0.18);
+}
+
+/* Hovered title-bar icons go dark blue: Tern slides a pale pill behind
+   the hovered tool button, and a white icon on it is invisible. */
+#tabbar .tb-tools .icon-btn:hover,
+#tabbar .tb-add:hover,
+#tabbar .tb-blocks .icon-btn:hover,
+#tabbar .tb-tools .icon-btn:hover svg.ico,
+#tabbar .tb-add:hover svg.ico,
+#tabbar .tb-blocks .icon-btn:hover svg.ico {
+  color: #153b89;
 }
 
 #tabbar .tb-tabs .tt.kit-tab {
@@ -227,8 +247,20 @@ select {
   border-radius: 3px;
 }
 
-button:not([role='tab']):not(.ft-hb):not(.sf-composer-send) {
+/* The XP bevel paints a 1px light top edge on plain buttons. The session
+   and host tabs are plain buttons too, so exclude them: on the blue strip
+   that edge reads as a stray white border around Default and the logo. */
+button:not([role='tab']):not(.ft-hb):not(.sf-composer-send):not(.icon-btn):not(.tn-session-tab):not(.tn-host-tab) {
   box-shadow: inset 0 1px 0 #ffffff;
+}
+
+/* Tab strip buttons sit directly on the blue gradient: the generic bevel's
+   white top edge reads as a stray white border on them. The Default session
+   tab is a plain <button> (not .icon-btn), so the exclusion above misses it
+   — verified live: a white line sits on top of the Default pill. Cream
+   kit-tabs keep their own inset edge. */
+#tabbar button:not(.tt.kit-tab):not([role='tab']) {
+  box-shadow: none;
 }
 
 input,
@@ -291,9 +323,52 @@ textarea {
   color: #ffffff;
 }
 
-/* Hovered Files row: XP's pale blue hover. */
-.ft-row:hover {
+/* Same white label, stronger selectors: a directory label can outrank
+   the rule above on some builds. */
+.ft-body .ft-row.on .lbl,
+.ft-body .ft-row[aria-selected='true'] .lbl,
+.ft-row.dir.on .lbl,
+.ft-row.dir[aria-selected='true'] .lbl,
+.ft-body .ft-row.on .lbl .stem,
+.ft-body .ft-row.on .lbl .ext,
+.ft-row.dir.on .lbl .stem,
+.ft-row.dir.on .lbl .ext,
+.ft-body .ft-row.on .ft-st,
+.ft-row.dir.on .ft-st,
+.ft-body .ft-row.on svg.ico,
+.ft-row.dir.on svg.ico {
+  color: #ffffff;
+}
+
+/* Selected rows win in every state (focused, unfocused, hovered): the
+   #panel anchor outranks Tern's own state rules, so a selected row is
+   always blue with white text — never grey with white text. */
+#panel .ft-row.on,
+#panel .ft-row[aria-selected='true'] {
+  background-color: #195bd8;
+  background-image: linear-gradient(to bottom, #3f82f3, #195bd8);
+  color: #ffffff;
+}
+
+#panel .ft-row.on .lbl,
+#panel .ft-row[aria-selected='true'] .lbl,
+#panel .ft-row.on .lbl .stem,
+#panel .ft-row.on .lbl .ext,
+#panel .ft-row.on .ft-st,
+#panel .ft-row.on svg.ico {
+  color: #ffffff;
+}
+
+/* Hovered Files row: XP's pale blue hover with dark text. :not(.on)
+   keeps hover from washing out a selected row (pale bg + white text). */
+.ft-row:hover:not(.on):not([aria-selected='true']) {
   background-color: #dce8ff;
+}
+
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl,
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl .stem,
+.ft-row:hover:not(.on):not([aria-selected='true']) .lbl .ext {
+  color: #202020;
 }
 
 /* Session tab icon: Tern leaves it grey on the blue strip; make it white
@@ -323,6 +398,29 @@ textarea {
 
 .csd-ctl .csd-close:hover {
   background-image: linear-gradient(to bottom, #f7b3a0 0%, #ef6a4a 45%, #d63f17 100%);
+}
+
+/* Restart-to-update pill: Tern paints it nearly transparent (a 10%
+   accent wash plus a blur animation), which is unreadable on the blue
+   strip. Solid white pill, dark blue text, no animated overlay. */
+.tn-up {
+  background: #ffffff;
+  color: #153b89;
+  box-shadow: inset 0 0 0 1px #9db9e8;
+  opacity: 1;
+}
+
+.tn-up .lbl,
+.tn-up .ico {
+  color: #153b89;
+}
+
+.tn-up:hover {
+  background: #e8eefb;
+}
+
+.tn-up .tn-up-fx {
+  display: none;
 }
 
 /* File editor bar: the IDE's tab/breadcrumb strip. Beige toolbar with a
